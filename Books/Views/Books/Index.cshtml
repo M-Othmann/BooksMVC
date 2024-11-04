@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Book>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-primary">Books</h1>
+
+<hr />
+
+<a href="@Url.Action("Create")" class="btn btn-primary my-4"  >
+    Add New
+</a>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning">
+        No books added
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Added on</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+
+
+
+
+                <tr>
+                    <td>@Html.ActionLink(book.Title,"Details","Books", new {id = book.Id})</td>
+                    <td>@book.Author</td>
+                    <td>@book.Category.Name</td>
+                    <td>@book.Description</td>
+                    <td>@book.AddedOn</td>
+                    <td>
+                        <a href="@Url.Action("Edit","Books" , new {id = book.Id})" class="btn btn-primary">
+                            Edit
+                        </a>
+                        <a href="@Url.Action("Delete","Books", new {id = book.Id})" class="btn btn-danger">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
+
